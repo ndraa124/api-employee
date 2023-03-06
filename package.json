@@ -1,0 +1,86 @@
+{
+  "name": "api-employee",
+  "version": "1.0.0",
+  "private": true,
+  "keywords": [
+    "programming",
+    "app"
+  ],
+  "author": "ID-124",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/plugin-transform-runtime": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "axios": "^1.3.4",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "~1.4.6",
+    "copyfiles": "^2.4.1",
+    "cors": "^2.8.5",
+    "debug": "~4.3.4",
+    "dotenv": "^16.0.3",
+    "express": "~4.18.2",
+    "helmet": "^6.0.1",
+    "http-errors": "~2.0.0",
+    "joi": "^17.8.3",
+    "jsonwebtoken": "^9.0.0",
+    "lodash.isempty": "^4.4.0",
+    "moment": "^2.29.4",
+    "morgan": "~1.10.0",
+    "mysql2": "^3.2.0",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.21",
+    "npm-run-all": "^4.1.5",
+    "response-time": "^2.3.2",
+    "rimraf": "^4.3.0",
+    "sequelize": "^6.29.0"
+  },
+  "devDependencies": {
+    "babel-jest": "^29.4.3",
+    "jest": "^29.4.3"
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "server/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "scripts": {
+    "start": "npm run start:dev",
+    "start:dev": "nodemon",
+    "start:prod": "pm2 start npm -- run prod",
+    "dev": "NODE_ENV=development npm-run-all build:dev server",
+    "build:dev": "npm-run-all clean transpile:dev",
+    "transpile:dev": "babel ./core --out-dir dist-core",
+    "prod": "NODE_ENV=production npm-run-all build:prod server",
+    "build:prod": "npm-run-all clean transpile:prod mkdirs copy",
+    "transpile:prod": "babel ./core --out-dir dist-core",
+    "clean": "rimraf dist-core",
+    "mkdirs": "mkdirp dist-core/bin/ssl",
+    "copy": "npm run copy:ssl",
+    "copy:ssl": "copyfiles -f ./core/bin/ssl/*.crt ./core/bin/ssl/*.ca_bundle ./core/bin/ssl/*.key dist-core/bin/ssl",
+    "server": "node ./dist-core/bin/www",
+    "test": "npm run clean && jest --detectOpenHandles"
+  }
+}
