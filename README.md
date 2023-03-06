@@ -1,4 +1,4 @@
-# Templte Node JS RESTful API
+# Employee RESTful API
 
 REST API using node js with DBMS MySQL
 
@@ -34,4 +34,3 @@ DB_USER     = root
 DB_PASSWORD =
 DB_DATABASE = DB_NAME
 ```
-# api-employee
