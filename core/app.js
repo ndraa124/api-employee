@@ -66,7 +66,7 @@ app.use((err, req, res, _next) => {
   _error({
     code: err.status || 500,
     response: res,
-    message: "Internal Server Error",
+    message: "internal server error",
   });
 });
 

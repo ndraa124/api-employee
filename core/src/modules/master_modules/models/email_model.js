@@ -1,4 +1,7 @@
 import Nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export async function sendEmail(email, subject, message) {
   return new Promise((resolve, reject) => {
@@ -8,8 +11,8 @@ export async function sendEmail(email, subject, message) {
       port: 465,
       secure: true,
       auth: {
-        user: "idprogramming124@gmail.com",
-        pass: "lwaoktsrdalkljcn",
+        user: process.env.USER_EMAIL,
+        pass: process.env.USER_EMAIL_PASS,
       },
     });
 
@@ -18,7 +21,7 @@ export async function sendEmail(email, subject, message) {
         reject(error);
       } else {
         let mailOptions = {
-          from: "CKB <idprogramming124@gmail.com>",
+          from: `CKB <${process.env.USER_EMAIL}>`,
           to: `Employee ${email}`,
           subject: subject,
           text: `${message}`,
