@@ -27,7 +27,7 @@ export function _payloadLogin(data) {
     username: data.username,
   };
 
-  const token = jwt.sign(payLoad, process.env.JWT_AUTHENTICATE_KEY, {
+  const token = jwt.sign(payLoad, process.env.JWT_PRIVATE_KEY, {
     expiresIn: "7d",
   });
 

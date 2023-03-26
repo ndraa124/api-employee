@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import Logger from "../../utils/logger";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -19,13 +20,19 @@ const conn = new Sequelize(
   }
 );
 
+if (process.env.NODE_ENV !== "production") {
+  conn.options.logging = (msg) => Logger.info(msg);
+} else {
+  conn.options.logging = false;
+}
+
 conn
   .authenticate()
   .then(() => {
-    console.log("Connection has been established successfully.");
+    console.log("success to connect to the database");
   })
   .catch((err) => {
-    console.error("Unable to connect to the database:", err);
+    console.log("unable to connect to the database:", err);
   });
 
 export default conn;

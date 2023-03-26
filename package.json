@@ -35,7 +35,8 @@
     "npm-run-all": "^4.1.5",
     "response-time": "^2.3.2",
     "rimraf": "^4.3.0",
-    "sequelize": "^6.29.0"
+    "sequelize": "^6.29.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "babel-jest": "^29.4.3",
@@ -75,12 +76,9 @@
     "build:dev": "npm-run-all clean transpile:dev",
     "transpile:dev": "babel ./core --out-dir dist-core",
     "prod": "NODE_ENV=production npm-run-all build:prod server",
-    "build:prod": "npm-run-all clean transpile:prod mkdirs copy",
+    "build:prod": "npm-run-all clean transpile:prod",
     "transpile:prod": "babel ./core --out-dir dist-core",
-    "clean": "rimraf dist-core",
-    "mkdirs": "mkdirp dist-core/bin/ssl",
-    "copy": "npm run copy:ssl",
-    "copy:ssl": "copyfiles -f ./core/bin/ssl/*.crt ./core/bin/ssl/*.ca_bundle ./core/bin/ssl/*.key dist-core/bin/ssl",
+    "clean": "rimraf dist-core log",
     "server": "node ./dist-core/bin/www",
     "test": "npm run clean && jest --detectOpenHandles"
   }

@@ -1,3 +1,7 @@
+import Logger from "./logger";
+import dotenv from "dotenv";
+dotenv.config();
+
 export function _success(status) {
   status.response.status(status.code).send({
     success: true,
@@ -15,6 +19,10 @@ export function _error(status) {
   } else {
     code = 400;
     message = "Invalid request";
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    Logger.error(message);
   }
 
   status.response.status(code).send({
