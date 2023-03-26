@@ -35,33 +35,6 @@ export async function getAllData(_req, res, _next) {
     });
 }
 
-export async function createData(req, res, _next) {
-  await createUser(req.body)
-    .then((result) => {
-      if (result) {
-        _success({
-          code: 201,
-          response: res,
-          message: "success to create data",
-          data: result,
-        });
-      } else {
-        _error({
-          code: 400,
-          response: res,
-          message: "fail to create data",
-        });
-      }
-    })
-    .catch((err) => {
-      _error({
-        code: 500,
-        response: res,
-        message: err,
-      });
-    });
-}
-
 export async function getData(req, res, _next) {
   const { id } = req.params;
 

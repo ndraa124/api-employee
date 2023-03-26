@@ -15,7 +15,7 @@ const User = db.define(
       allowNull: false,
     },
     password: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING(100),
       allowNull: false,
     },
   },
@@ -29,9 +29,36 @@ const User = db.define(
 
 User.sync({ alter: true });
 
+const responseListUser = (result) => {
+  const data = [];
+
+  result.forEach((el, i) => {
+    data[i] = {
+      id: el.id,
+      username: el.username,
+      created_at: el.created_at,
+      updated_at: el.updated_at,
+    };
+  });
+
+  return data;
+};
+
 export function getAllUser() {
   return new Promise((resolve, reject) => {
     User.findAll()
+      .then((result) => {
+        resolve(responseListUser(result));
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function getAllUsername(username) {
+  return new Promise((resolve, reject) => {
+    User.findAll({ where: { username: username } })
       .then((result) => {
         resolve(result);
       })
@@ -56,6 +83,18 @@ export function createUser(data) {
 export function getUser(id) {
   return new Promise((resolve, reject) => {
     User.findOne({ where: { id: id } })
+      .then((result) => {
+        resolve(result);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function getUsername(username) {
+  return new Promise((resolve, reject) => {
+    User.findOne({ where: { username: username } })
       .then((result) => {
         resolve(result);
       })

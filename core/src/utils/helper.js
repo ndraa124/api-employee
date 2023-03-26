@@ -1,3 +1,8 @@
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+dotenv.config();
+
 export function _marriedStatus(value) {
   if (value == 0) {
     return "Married";
@@ -12,4 +17,19 @@ export function _genderStatus(value) {
   } else {
     return "Female";
   }
+}
+
+export function _payloadLogin(data) {
+  let payLoad;
+
+  payLoad = {
+    id: data.id,
+    username: data.username,
+  };
+
+  const token = jwt.sign(payLoad, process.env.JWT_AUTHENTICATE_KEY, {
+    expiresIn: "7d",
+  });
+
+  return (payLoad = { ...payLoad, token });
 }
