@@ -5,6 +5,7 @@
 dist-core
 build
 core/bin/ssl
+log
 
 # Icon must end with two \r
 Icon
@@ -113,3 +114,4 @@ typings/
 package-lock.json
 
 # End of https://www.gitignore.io/api/node
+.gitignore
