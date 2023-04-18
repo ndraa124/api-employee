@@ -1,4 +1,4 @@
-import Employee from "../../../config/model/employee";
+import Employee from "../../../config/table/employee";
 
 export function getAllEmployee() {
   return new Promise((resolve, reject) => {

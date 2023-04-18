@@ -5,11 +5,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const conn = new Sequelize(
-  process.env.DEV_DATABASE_SERVICE,
-  process.env.DEV_USER_SERVICE,
-  process.env.DEV_PASS_SERVICE,
+  process.env.DATABASE_NAME,
+  process.env.DATABASE_USERNAME,
+  process.env.DATABASE_PASSWORD,
   {
-    host: process.env.DEV_HOST_SERVICE,
+    host: process.env.DATABASE_HOST,
     dialect: "mysql",
     pool: {
       max: 7,

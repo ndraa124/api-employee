@@ -1,4 +1,4 @@
-import User from "../../../config/model/user";
+import User from "../../../config/table/user";
 
 const responseListUser = (result) => {
   const data = [];

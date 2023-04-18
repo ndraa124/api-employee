@@ -13,7 +13,7 @@ import dotenv from "dotenv";
 const debug = debugLib("aou-notes:server");
 dotenv.config();
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "4000");
 app.set("port", port);
 
 let options, server;
